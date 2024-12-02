@@ -1,0 +1,186 @@
+m255
+K4
+z2
+!s11e MIXED_VERSIONS
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/intelFPGA/20.1
+Ealu
+Z0 w1733084209
+Z1 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z3 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 80
+Z4 dC:/cpu
+Z5 8C:/cpu/alu.vhd
+Z6 FC:/cpu/alu.vhd
+l0
+L5 1
+VC`_jb;6NjldI37>o88K<32
+!s100 J2L4<3m=7UaFC^MZ@PGXm3
+Z7 OV;C;2020.1;71
+32
+Z8 !s110 1733085202
+!i10b 1
+Z9 !s108 1733085202.000000
+Z10 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/cpu/alu.vhd|
+Z11 !s107 C:/cpu/alu.vhd|
+!i113 1
+Z12 o-work work -2002 -explicit
+Z13 tExplicit 1 CvgOpt 0
+Abehavior
+R1
+R2
+R3
+Z14 DEx4 work 3 alu 0 22 C`_jb;6NjldI37>o88K<32
+!i122 80
+l16
+L15 35
+V9Hj45_@hYf:WHclZMj54Y0
+!s100 706YUX1Yc9Y0XZC;:VVO63
+R7
+32
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Ecpu
+Z15 w1733094025
+R1
+R2
+R3
+!i122 87
+R4
+Z16 8C:/cpu/cpu.vhd
+Z17 FC:/cpu/cpu.vhd
+l0
+L5 1
+VC3P[cDjikBHhJ`=<QFOi^2
+!s100 hj31EEYiN224ci<BYa>bd2
+R7
+32
+Z18 !s110 1733094044
+!i10b 1
+Z19 !s108 1733094044.000000
+Z20 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/cpu/cpu.vhd|
+Z21 !s107 C:/cpu/cpu.vhd|
+!i113 1
+R12
+R13
+Abehavior
+R14
+Z22 DPx9 altera_mf 20 altera_mf_components 0 22 BN6nPmY:UEbXa[^5b@FTW1
+Z23 DEx4 work 7 memoria 0 22 fGloM=5T4BB;OmmgjF7ab2
+R1
+R2
+R3
+Z24 DEx4 work 3 cpu 0 22 C3P[cDjikBHhJ`=<QFOi^2
+!i122 87
+l53
+L12 687
+VQiDSh;^im<ZREZE1<V[k]1
+!s100 Val0B5mQglEQCY3fm9Ab`3
+R7
+32
+R18
+!i10b 1
+R19
+R20
+R21
+!i113 1
+R12
+R13
+Ememoria
+Z25 w1733008618
+R22
+R2
+R3
+!i122 52
+R4
+Z26 8C:/cpu/memoria.vhd
+Z27 FC:/cpu/memoria.vhd
+l0
+L43 1
+VfGloM=5T4BB;OmmgjF7ab2
+!s100 egAhDhUH39ll]Zg?T>S`o3
+R7
+32
+Z28 !s110 1733027401
+!i10b 1
+Z29 !s108 1733027401.000000
+Z30 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/cpu/memoria.vhd|
+Z31 !s107 C:/cpu/memoria.vhd|
+!i113 1
+R12
+R13
+Asyn
+R22
+R2
+R3
+R23
+!i122 52
+l59
+L55 37
+VYWQ:`<e1cCn64KKz6;^:J2
+!s100 Hc2U`iA:?JRXOnz@9YiU70
+R7
+32
+R28
+!i10b 1
+R29
+R30
+R31
+!i113 1
+R12
+R13
+Etestbench
+Z32 w1733008322
+R1
+R2
+R3
+!i122 53
+R4
+Z33 8C:/cpu/testbench.vhd
+Z34 FC:/cpu/testbench.vhd
+l0
+L5 1
+VZPVk;nCdJK>KURNZKLGGM1
+!s100 AKP9mV3P:`ZYUYQ95BZ=:1
+R7
+32
+R28
+!i10b 1
+R29
+Z35 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/cpu/testbench.vhd|
+Z36 !s107 C:/cpu/testbench.vhd|
+!i113 1
+R12
+R13
+Asim
+R1
+R2
+R3
+DEx4 work 9 testbench 0 22 ZPVk;nCdJK>KURNZKLGGM1
+!i122 53
+l25
+L8 53
+VVN`>JioD>aLn3J>JWVlU=1
+!s100 bTcZEiE<g66I][I;b@:1<1
+R7
+32
+R28
+!i10b 1
+R29
+R35
+R36
+!i113 1
+R12
+R13

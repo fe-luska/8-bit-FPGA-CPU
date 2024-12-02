@@ -1,0 +1,30 @@
+
+State Machine - |cpu|state_alu_monitor
+Name state_alu_monitor.ready state_alu_monitor.fetch_operand_B state_alu_monitor.fetch_operand_A 
+state_alu_monitor.fetch_operand_A 0 0 0 
+state_alu_monitor.fetch_operand_B 0 1 1 
+state_alu_monitor.ready 1 0 1 
+
+State Machine - |cpu|state_monitor
+Name state_monitor.fetch_wait state_monitor.wait_read state_monitor.execute state_monitor.decode_wait state_monitor.decode state_monitor.fetch 
+state_monitor.fetch 0 0 0 0 0 0 
+state_monitor.decode 0 0 0 0 1 1 
+state_monitor.decode_wait 0 0 0 1 0 1 
+state_monitor.execute 0 0 1 0 0 1 
+state_monitor.wait_read 0 1 0 0 0 1 
+state_monitor.fetch_wait 1 0 0 0 0 1 
+
+State Machine - |cpu|alu_state
+Name alu_state.ready alu_state.fetch_operand_B alu_state.fetch_operand_A 
+alu_state.fetch_operand_A 0 0 0 
+alu_state.fetch_operand_B 0 1 1 
+alu_state.ready 1 0 1 
+
+State Machine - |cpu|state
+Name state.fetch_wait state.wait_read state.execute state.decode_wait state.decode state.fetch 
+state.fetch 0 0 0 0 0 0 
+state.decode 0 0 0 0 1 1 
+state.decode_wait 0 0 0 1 0 1 
+state.execute 0 0 1 0 0 1 
+state.wait_read 0 1 0 0 0 1 
+state.fetch_wait 1 0 0 0 0 1 

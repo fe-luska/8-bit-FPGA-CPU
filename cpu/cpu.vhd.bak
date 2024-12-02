@@ -1,0 +1,49 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity cpu is
+	port (
+		clk          : in  std_logic;
+      reset        : in  std_logic;
+      address_bus  : buffer std_logic_vector(7 downto 0);
+      data_bus     : inout std_logic_vector(7 downto 0);
+      control_bus  : out std_logic_vector(5 downto 0);
+   );
+end cpu;
+
+architecture behavior of cpu is
+
+   -- Registradores
+	signal PC  : std_logic_vector(7 downto 0) := (others => '0'); -- Program Counter
+   signal IR  : std_logic_vector(7 downto 0) := (others => '0'); -- Instruction Register
+   signal R : std_logic_vector(7 downto 0) := (others => '0'); -- resultados da ALU
+	signal A : std_logic_vector(7 downto 0) := (others => '0'); -- operando A
+	signal B : std_logic_vector(7 downto 0) := (others => '0'); -- operando B
+
+	--TO-DO: adicionar as flags Zero, Sinal, Carry, Overflow
+	 
+	-- barramentos
+	signal address_bus  : buffer std_logic_vector(7 downto 0);
+   signal data_bus     : inout std_logic_vector(7 downto 0);
+   signal control_bus  : out std_logic_vector(5 downto 0);
+	 
+   -- Sinais de controle
+   signal read, write, mem_enable : std_logic;
+   signal alu_enable : std_logic;
+	
+begin
+
+	-- Instanciar memoria, ALU e unid de controle
+	
+	process(clk)
+	begin
+	
+	
+	
+	
+	
+	
+	end process;
+	
+end behavior;
