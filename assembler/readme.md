@@ -1,6 +1,6 @@
 # Assembler
 
-Foi desenvolvido um assembler compatível com a CPU apresentada. Ele suporta rótulos para referências a endereços de memória, instruções básicas de controle, operações aritméticas/lógicas e comentários no código iniciados com “;”. O assembler inclui verificações de sintaxe e retorna erros explicativos caso ocorram.
+Foi desenvolvido um assembler compatível com a CPU apresentada. Ele suporta rótulos para referências a endereços de memória, instruções básicas de controle, operações aritméticas/lógicas e comentários no código iniciados com “;”. O assembler inclui verificações de sintaxe e retorna erros explicativos caso ocorram. No final do processo, gera um arquivo .mif com o código de máquina da CPU.
 
 ---
 
@@ -24,11 +24,11 @@ Foi desenvolvido um assembler compatível com a CPU apresentada. Ele suporta ró
 python assembler.py <arquivo_de_entrada> <arquivo_de_saida>
 ```
 
-4.Depois que o arquivo .hex foi gerado, mova-o para o diretório “cpu” e modifique seu nome para “memoria_dados.hex" para ser reconhecido pela CPU.
+4.Depois que o arquivo .mif foi gerado, mova-o para o diretório “cpu” e modifique seu nome para “memoria_dados.mif" para ser reconhecido pela CPU (ou gere esse arquivo direto no diretorio desejado com o nome citado).
 
 #### Parâmetros
 - <arquivo_de_entrada>: Nome do arquivo de entrada contendo o código assembly com a extensão .asm.
-- <arquivo_de_saida>: Nome do arquivo de saída onde o código de máquina será salvo com a extensão .hex.
+- <arquivo_de_saida>: Nome do arquivo de saída onde o código de máquina será salvo com a extensão .mif.
 
 ### Formato do Código Assembly
 - Cada linha contém uma instrução ou rótulo.
