@@ -40,7 +40,7 @@ python assembler.py <arquivo_de_entrada> <arquivo_de_saida>
 ```assembly
 ; Exemplo de código assembly
 START:
-    LOAD A, 10  ; Carrega o valor 10 no registrador A
+    LOAD A, 10  ; Carrega o valor que está no endereço 10 (decimal) no registrador A
     CMP A, B    ; Compara os valores de A e B
     JEQ END     ; Salta para END se A for igual a B
     ADD A, B    ; Soma A com B
@@ -56,6 +56,8 @@ No diretorio "codigos exemplo" há exemplos programas em assembly aceitos pelo a
 ## Conjunto de Instruções
 
 ### Instruções Suportadas
+
+As instruções suportadas são as instruções apresentadas anteriormente no documento principal do projeto, porém, aqui está uma tabela resumida das instruções. Caso seja necessário, verifique o detalhamento das instruções no diretório raíz do projeto.
 
 | Instrução | Opcode | Parâmetros         | Descrição                              |
 |-------------|--------|-------------------|------------------------------------------|
@@ -75,6 +77,8 @@ No diretorio "codigos exemplo" há exemplos programas em assembly aceitos pelo a
 | IN          | D      | Registrador       | Carrega o valor das chaves no registrador |
 | OUT         | E      | Registrador       | Exibe o valor do registrador nos LEDs     |
 | WAIT        | F      | -                 | Aguarda o botão ser pressionado.          |
+
+Obs: Os endereços utilizados em LOAD e STORE devem ser decimais de 0 a 255.
 
 ### Registradores Suportados
 
