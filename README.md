@@ -1,7 +1,3 @@
-UNIVERSIDADE DE SÃO PAULO
-INSTITUTO DE CIÊNCIAS MATEMÁTICAS E DE COMPUTAÇÃO
-DEPARTAMENTO DE SISTEMAS DE COMPUTAÇÃO
-
 # Introdução
 Este projeto implementa uma CPU de 8 bits com arquitetura básica, incluindo registradores, barramentos, memória, módulo de E/S (entrada e saída) e unidade lógica e aritmética (ALU). A CPU é projetada para executar instruções de forma síncrona com um clock e suporta um conjunto básico de operações.
 
@@ -293,3 +289,8 @@ As instruções suportadas são as instruções apresentadas anteriormente, por�
 ### Resolução de Endereços
 - Ajustar endereços temporários após remoção de rótulos.
 - Substituir endereços temporários por endereços finais.
+
+
+# UNIVERSIDADE DE SÃO PAULO
+>INSTITUTO DE CIÊNCIAS MATEMÁTICAS E DE COMPUTAÇÃO
+>DEPARTAMENTO DE SISTEMAS DE COMPUTAÇÃO
