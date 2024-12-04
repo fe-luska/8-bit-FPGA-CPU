@@ -14,21 +14,19 @@ Foi desenvolvido um assembler compatível com a CPU apresentada. Ele suporta ró
 
 ## Uso do Assembler
 
-### Execução
-
-1. Certifique-se de que o Python está instalado em seu sistema.
-2. Salve o código do assembler em um arquivo chamado `assembler.py`.
-3. Execute o assembler com o seguinte comando:
-
-```bash
-python assembler.py <arquivo_de_entrada> <arquivo_de_saida>
-```
-
-4.Depois que o arquivo .mif foi gerado, mova-o para o diretório “cpu” e modifique seu nome para “memoria_dados.mif" para ser reconhecido pela CPU (ou gere esse arquivo direto no diretorio desejado com o nome citado).
+#### Execução
+1. Salve o código do assembler no diretório `assembler` em um arquivo chamado `assembler.py`.
+2. Execute o assembler com o seguinte comando:
+   ```bash
+   python assembler.py <arquivo_de_entrada> <arquivo_de_saida>
+   ```
+3. Depois que o arquivo `.mif` for gerado, mova-o para o diretório `/cpu` e modifique seu nome para `memoria_dados.mif` para ser reconhecido pela CPU. Quando a CPU for iniciada, o programa será carregado na memória automaticamente.
 
 #### Parâmetros
-- <arquivo_de_entrada>: Nome do arquivo de entrada contendo o código assembly com a extensão .asm.
-- <arquivo_de_saida>: Nome do arquivo de saída onde o código de máquina será salvo com a extensão .mif.
+- **`<arquivo_de_entrada>`**: Nome do arquivo de entrada contendo o código assembly com a extensão `.asm`.
+- **`<arquivo_de_saida>`**: Nome do arquivo de saída onde o código de máquina será salvo com a extensão `.mif`.
+
+---
 
 ### Formato do Código Assembly
 - Cada linha contém uma instrução ou rótulo.
