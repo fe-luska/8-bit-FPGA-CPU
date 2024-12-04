@@ -1,5 +1,5 @@
-LOAD A, 20       ; Carrega o valor do endereço 20 no registrador A
-LOAD B, 21       ; Carrega o valor do endereço 21 no registrador B
+IN A		 ; Carrega o valor das chaves no registrador A
+IN B       	 ; Carrega o valor das chaves no registrador B
 CMP A, B         ; Compara A e B
 JGR 8            ; Salta para o endereço 8 se A > B
 MOV R, B         ; Move B para R

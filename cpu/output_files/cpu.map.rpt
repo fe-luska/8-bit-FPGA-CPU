@@ -1,5 +1,5 @@
 Analysis & Synthesis report for cpu
-Sun Dec  1 20:00:39 2024
+Mon Dec  2 17:08:40 2024
 Quartus Prime Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
 
 
@@ -25,10 +25,11 @@ Quartus Prime Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
  17. Source assignments for memoria:memory_inst|altsyncram:altsyncram_component|altsyncram_ve34:auto_generated
  18. Parameter Settings for User Entity Instance: memoria:memory_inst|altsyncram:altsyncram_component
  19. altsyncram Parameter Settings by Entity Instance
- 20. Port Connectivity Checks: "alu:alu_inst"
- 21. Post-Synthesis Netlist Statistics for Top Partition
- 22. Elapsed Time Per Partition
- 23. Analysis & Synthesis Messages
+ 20. Port Connectivity Checks: "io_module:io_inst"
+ 21. Port Connectivity Checks: "alu:alu_inst"
+ 22. Post-Synthesis Netlist Statistics for Top Partition
+ 23. Elapsed Time Per Partition
+ 24. Analysis & Synthesis Messages
 
 
 
@@ -55,7 +56,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Sun Dec  1 20:00:39 2024       ;
+; Analysis & Synthesis Status     ; Successful - Mon Dec  2 17:08:40 2024       ;
 ; Quartus Prime Version           ; 21.1.0 Build 842 10/21/2021 SJ Lite Edition ;
 ; Revision Name                   ; cpu                                         ;
 ; Top-level Entity Name           ; cpu                                         ;
@@ -186,6 +187,7 @@ https://fpgasoftware.intel.com/eula.
 ; cpu.vhd                          ; yes             ; User VHDL File                         ; C:/cpu/cpu.vhd                                                               ;         ;
 ; memoria.vhd                      ; yes             ; User Wizard-Generated File             ; C:/cpu/memoria.vhd                                                           ;         ;
 ; alu.vhd                          ; yes             ; User VHDL File                         ; C:/cpu/alu.vhd                                                               ;         ;
+; io_module.vhd                    ; yes             ; User VHDL File                         ; C:/cpu/io_module.vhd                                                         ;         ;
 ; altsyncram.tdf                   ; yes             ; Megafunction                           ; c:/intelfpga_lite/21.1/quartus/libraries/megafunctions/altsyncram.tdf        ;         ;
 ; stratix_ram_block.inc            ; yes             ; Megafunction                           ; c:/intelfpga_lite/21.1/quartus/libraries/megafunctions/stratix_ram_block.inc ;         ;
 ; lpm_mux.inc                      ; yes             ; Megafunction                           ; c:/intelfpga_lite/21.1/quartus/libraries/megafunctions/lpm_mux.inc           ;         ;
@@ -305,6 +307,7 @@ Encoding Type:  One-Hot
 +----------------------------------------+--------------------+
 ; Register name                          ; Reason for Removal ;
 +----------------------------------------+--------------------+
+; botao_despressionado                   ; Lost fanout        ;
 ; state_alu_monitor.fetch_operand_A      ; Lost fanout        ;
 ; state_alu_monitor.fetch_operand_B      ; Lost fanout        ;
 ; state_alu_monitor.ready                ; Lost fanout        ;
@@ -340,12 +343,12 @@ Encoding Type:  One-Hot
 ; A[3]                                   ; Lost fanout        ;
 ; B[3]                                   ; Lost fanout        ;
 ; R[3]                                   ; Lost fanout        ;
-; A[0]                                   ; Lost fanout        ;
-; B[0]                                   ; Lost fanout        ;
-; R[0]                                   ; Lost fanout        ;
 ; A[1]                                   ; Lost fanout        ;
 ; B[1]                                   ; Lost fanout        ;
 ; R[1]                                   ; Lost fanout        ;
+; A[0]                                   ; Lost fanout        ;
+; B[0]                                   ; Lost fanout        ;
+; R[0]                                   ; Lost fanout        ;
 ; op_a[4]                                ; Lost fanout        ;
 ; op_b[0..7]                             ; Lost fanout        ;
 ; op_a[0..3,5..7]                        ; Lost fanout        ;
@@ -360,34 +363,34 @@ Encoding Type:  One-Hot
 ; state.execute                          ; Lost fanout        ;
 ; state.wait_read                        ; Lost fanout        ;
 ; state.fetch_wait                       ; Lost fanout        ;
-; Total Number of Removed Registers = 94 ;                    ;
+; Total Number of Removed Registers = 95 ;                    ;
 +----------------------------------------+--------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Removed Registers Triggering Further Register Optimizations                                                                                                        ;
-+-----------------------------------+--------------------+-----------------------------------------------------------------------------------------------------------+
-; Register name                     ; Reason for Removal ; Registers Removed due to This Register                                                                    ;
-+-----------------------------------+--------------------+-----------------------------------------------------------------------------------------------------------+
-; IR[4]                             ; Lost Fanouts       ; mem_wren, IR[0], IR[1], mem_data_in[4], address_bus[0], address_bus[1], address_bus[2],                   ;
-;                                   ;                    ; address_bus[3], address_bus[4], mem_data_in[0], mem_data_in[1], A[4], B[4], R[4], PC[0], PC[4],           ;
-;                                   ;                    ; PC[3], PC[2], PC[1], A[0], B[0], R[0], A[1], B[1], R[1], op_a[4], op_a[0], op_a[1], equal_flag, sign_flag ;
-; IR[5]                             ; Lost Fanouts       ; mem_data_in[5], A[5], B[5], R[5], op_a[5]                                                                 ;
-; IR[6]                             ; Lost Fanouts       ; mem_data_in[6], A[6], B[6], R[6], op_a[6]                                                                 ;
-; IR[7]                             ; Lost Fanouts       ; mem_data_in[7], A[7], B[7], R[7], op_a[7]                                                                 ;
-; IR[2]                             ; Lost Fanouts       ; mem_data_in[2], A[2], B[2], R[2], op_a[2]                                                                 ;
-; IR[3]                             ; Lost Fanouts       ; mem_data_in[3], A[3], B[3], R[3], op_a[3]                                                                 ;
-; state_alu_monitor.fetch_operand_A ; Lost Fanouts       ; alu_state.fetch_operand_A, alu_state.ready                                                                ;
-; state_monitor.execute             ; Lost Fanouts       ; state.decode_wait, state.wait_read                                                                        ;
-; state_alu_monitor.fetch_operand_B ; Lost Fanouts       ; alu_state.fetch_operand_B                                                                                 ;
-; state_monitor.fetch               ; Lost Fanouts       ; state.execute                                                                                             ;
-; state_monitor.decode              ; Lost Fanouts       ; state.fetch_wait                                                                                          ;
-; state_monitor.decode_wait         ; Lost Fanouts       ; state.decode                                                                                              ;
-; state_monitor.fetch_wait          ; Lost Fanouts       ; state.fetch                                                                                               ;
-; address_bus[5]                    ; Lost Fanouts       ; PC[5]                                                                                                     ;
-; address_bus[6]                    ; Lost Fanouts       ; PC[6]                                                                                                     ;
-; address_bus[7]                    ; Lost Fanouts       ; PC[7]                                                                                                     ;
-+-----------------------------------+--------------------+-----------------------------------------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                                                     ;
++-----------------------------------+--------------------+--------------------------------------------------------------------------------------------------------+
+; Register name                     ; Reason for Removal ; Registers Removed due to This Register                                                                 ;
++-----------------------------------+--------------------+--------------------------------------------------------------------------------------------------------+
+; botao_despressionado              ; Lost Fanouts       ; IR[4], IR[6], IR[7], mem_wren, IR[1], IR[0], mem_data_in[4], address_bus[0], address_bus[1],           ;
+;                                   ;                    ; address_bus[2], address_bus[3], address_bus[4], mem_data_in[6], mem_data_in[7],                        ;
+;                                   ;                    ; mem_data_in[1], mem_data_in[0], A[4], B[4], R[4], PC[0], PC[4], PC[3], PC[2], PC[1], A[6], B[6], R[6], ;
+;                                   ;                    ; A[7], B[7], R[7], A[1], B[1], R[1], A[0], B[0], R[0], op_a[4], op_a[0], op_a[1], op_a[6], op_a[7],     ;
+;                                   ;                    ; equal_flag, sign_flag                                                                                  ;
+; IR[5]                             ; Lost Fanouts       ; mem_data_in[5], A[5], B[5], R[5], op_a[5]                                                              ;
+; IR[2]                             ; Lost Fanouts       ; mem_data_in[2], A[2], B[2], R[2], op_a[2]                                                              ;
+; IR[3]                             ; Lost Fanouts       ; mem_data_in[3], A[3], B[3], R[3], op_a[3]                                                              ;
+; state_alu_monitor.fetch_operand_A ; Lost Fanouts       ; alu_state.fetch_operand_A, alu_state.ready                                                             ;
+; state_monitor.execute             ; Lost Fanouts       ; state.decode_wait, state.wait_read                                                                     ;
+; state_alu_monitor.fetch_operand_B ; Lost Fanouts       ; alu_state.fetch_operand_B                                                                              ;
+; state_monitor.fetch               ; Lost Fanouts       ; state.execute                                                                                          ;
+; state_monitor.decode              ; Lost Fanouts       ; state.fetch_wait                                                                                       ;
+; state_monitor.decode_wait         ; Lost Fanouts       ; state.decode                                                                                           ;
+; state_monitor.fetch_wait          ; Lost Fanouts       ; state.fetch                                                                                            ;
+; address_bus[5]                    ; Lost Fanouts       ; PC[5]                                                                                                  ;
+; address_bus[6]                    ; Lost Fanouts       ; PC[6]                                                                                                  ;
+; address_bus[7]                    ; Lost Fanouts       ; PC[7]                                                                                                  ;
++-----------------------------------+--------------------+--------------------------------------------------------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -410,19 +413,19 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
-; 3:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |cpu|IR[0]                 ;
-; 5:1                ; 8 bits    ; 24 LEs        ; 16 LEs               ; 8 LEs                  ; Yes        ; |cpu|mem_data_in[4]        ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |cpu|IR[3]                 ;
+; 5:1                ; 8 bits    ; 24 LEs        ; 16 LEs               ; 8 LEs                  ; Yes        ; |cpu|mem_data_in[7]        ;
 ; 6:1                ; 8 bits    ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |cpu|op_b[4]               ;
 ; 9:1                ; 8 bits    ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |cpu|op_a[7]               ;
 ; 20:1               ; 8 bits    ; 104 LEs       ; 0 LEs                ; 104 LEs                ; Yes        ; |cpu|A[2]                  ;
-; 20:1               ; 8 bits    ; 104 LEs       ; 0 LEs                ; 104 LEs                ; Yes        ; |cpu|B[0]                  ;
+; 20:1               ; 8 bits    ; 104 LEs       ; 0 LEs                ; 104 LEs                ; Yes        ; |cpu|B[2]                  ;
 ; 21:1               ; 8 bits    ; 112 LEs       ; 16 LEs               ; 96 LEs                 ; Yes        ; |cpu|address_bus[0]        ;
-; 30:1               ; 8 bits    ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |cpu|R[4]                  ;
-; 22:1               ; 2 bits    ; 28 LEs        ; 16 LEs               ; 12 LEs                 ; Yes        ; |cpu|equal_flag            ;
-; 25:1               ; 8 bits    ; 128 LEs       ; 0 LEs                ; 128 LEs                ; Yes        ; |cpu|PC[3]                 ;
+; 17:1               ; 2 bits    ; 22 LEs        ; 16 LEs               ; 6 LEs                  ; Yes        ; |cpu|sign_flag             ;
+; 30:1               ; 8 bits    ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |cpu|R[2]                  ;
+; 23:1               ; 8 bits    ; 120 LEs       ; 0 LEs                ; 120 LEs                ; Yes        ; |cpu|PC[3]                 ;
 ; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |cpu|Mux136                ;
 ; 7:1                ; 3 bits    ; 12 LEs        ; 3 LEs                ; 9 LEs                  ; No         ; |cpu|alu_state             ;
-; 17:1               ; 4 bits    ; 44 LEs        ; 16 LEs               ; 28 LEs                 ; No         ; |cpu|Mux164                ;
+; 17:1               ; 3 bits    ; 33 LEs        ; 15 LEs               ; 18 LEs                 ; No         ; |cpu|Mux162                ;
 ; 1:1                ; 8 bits    ; 0 LEs         ; 0 LEs                ; 0 LEs                  ; No         ; |cpu|alu:alu_inst|Add0     ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
 
@@ -517,6 +520,16 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------------------------------------------+-----------------------------------------------------+
 
 
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "io_module:io_inst"                                                                      ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; led      ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; data_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
 +---------------------------------------------------------------------------------------------------------------------+
 ; Port Connectivity Checks: "alu:alu_inst"                                                                            ;
 +-----------+--------+----------+-------------------------------------------------------------------------------------+
@@ -553,7 +566,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
-    Info: Processing started: Sun Dec  1 20:00:30 2024
+    Info: Processing started: Mon Dec  2 17:08:32 2024
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off cpu -c cpu
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 12 of the 12 processors detected
@@ -569,12 +582,20 @@ Info (12021): Found 2 design units, including 1 entities, in source file testben
 Info (12021): Found 2 design units, including 1 entities, in source file alu.vhd
     Info (12022): Found design unit 1: alu-behavior File: C:/cpu/alu.vhd Line: 15
     Info (12023): Found entity 1: alu File: C:/cpu/alu.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file io_module.vhd
+    Info (12022): Found design unit 1: io_module-Behavioral File: C:/cpu/io_module.vhd Line: 17
+    Info (12023): Found entity 1: io_module File: C:/cpu/io_module.vhd Line: 6
 Info (12127): Elaborating entity "cpu" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at cpu.vhd(28): object "alu_enable" assigned a value but never read File: C:/cpu/cpu.vhd Line: 28
-Warning (10036): Verilog HDL or VHDL warning at cpu.vhd(37): object "zero_flag" assigned a value but never read File: C:/cpu/cpu.vhd Line: 37
-Warning (10036): Verilog HDL or VHDL warning at cpu.vhd(50): object "state_monitor" assigned a value but never read File: C:/cpu/cpu.vhd Line: 50
-Warning (10036): Verilog HDL or VHDL warning at cpu.vhd(51): object "state_alu_monitor" assigned a value but never read File: C:/cpu/cpu.vhd Line: 51
-Info (12128): Elaborating entity "memoria" for hierarchy "memoria:memory_inst" File: C:/cpu/cpu.vhd Line: 56
+Warning (10036): Verilog HDL or VHDL warning at cpu.vhd(24): object "control_bus" assigned a value but never read File: C:/cpu/cpu.vhd Line: 24
+Warning (10036): Verilog HDL or VHDL warning at cpu.vhd(37): object "alu_enable" assigned a value but never read File: C:/cpu/cpu.vhd Line: 37
+Warning (10036): Verilog HDL or VHDL warning at cpu.vhd(47): object "zero_flag" assigned a value but never read File: C:/cpu/cpu.vhd Line: 47
+Warning (10036): Verilog HDL or VHDL warning at cpu.vhd(60): object "io_data_out" assigned a value but never read File: C:/cpu/cpu.vhd Line: 60
+Warning (10541): VHDL Signal Declaration warning at cpu.vhd(63): used implicit default value for signal "io_SW" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/cpu/cpu.vhd Line: 63
+Warning (10541): VHDL Signal Declaration warning at cpu.vhd(64): used implicit default value for signal "io_BTN" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/cpu/cpu.vhd Line: 64
+Warning (10036): Verilog HDL or VHDL warning at cpu.vhd(65): object "io_LED" assigned a value but never read File: C:/cpu/cpu.vhd Line: 65
+Warning (10036): Verilog HDL or VHDL warning at cpu.vhd(70): object "state_monitor" assigned a value but never read File: C:/cpu/cpu.vhd Line: 70
+Warning (10036): Verilog HDL or VHDL warning at cpu.vhd(71): object "state_alu_monitor" assigned a value but never read File: C:/cpu/cpu.vhd Line: 71
+Info (12128): Elaborating entity "memoria" for hierarchy "memoria:memory_inst" File: C:/cpu/cpu.vhd Line: 76
 Info (12128): Elaborating entity "altsyncram" for hierarchy "memoria:memory_inst|altsyncram:altsyncram_component" File: C:/cpu/memoria.vhd Line: 62
 Info (12130): Elaborated megafunction instantiation "memoria:memory_inst|altsyncram:altsyncram_component" File: C:/cpu/memoria.vhd Line: 62
 Info (12133): Instantiated megafunction "memoria:memory_inst|altsyncram:altsyncram_component" with the following parameter: File: C:/cpu/memoria.vhd Line: 62
@@ -631,9 +652,10 @@ Info (12133): Instantiated megafunction "memoria:memory_inst|altsyncram:altsyncr
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_ve34.tdf
     Info (12023): Found entity 1: altsyncram_ve34 File: C:/cpu/db/altsyncram_ve34.tdf Line: 28
 Info (12128): Elaborating entity "altsyncram_ve34" for hierarchy "memoria:memory_inst|altsyncram:altsyncram_component|altsyncram_ve34:auto_generated" File: c:/intelfpga_lite/21.1/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12128): Elaborating entity "alu" for hierarchy "alu:alu_inst" File: C:/cpu/cpu.vhd Line: 66
+Info (12128): Elaborating entity "alu" for hierarchy "alu:alu_inst" File: C:/cpu/cpu.vhd Line: 86
 Warning (10492): VHDL Process Statement warning at alu.vhd(43): signal "result" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/cpu/alu.vhd Line: 43
 Warning (10620): VHDL warning at alu.vhd(43): comparison between unequal length operands always returns FALSE File: C:/cpu/alu.vhd Line: 43
+Info (12128): Elaborating entity "io_module" for hierarchy "io_module:io_inst" File: C:/cpu/cpu.vhd Line: 96
 Warning (14284): Synthesized away the following node(s):
     Warning (14285): Synthesized away the following RAM node(s):
         Warning (14320): Synthesized away node "memoria:memory_inst|altsyncram:altsyncram_component|altsyncram_ve34:auto_generated|q_a[4]" File: C:/cpu/db/altsyncram_ve34.tdf Line: 133
@@ -642,9 +664,9 @@ Warning (14284): Synthesized away the following node(s):
         Warning (14320): Synthesized away node "memoria:memory_inst|altsyncram:altsyncram_component|altsyncram_ve34:auto_generated|q_a[7]" File: C:/cpu/db/altsyncram_ve34.tdf Line: 205
         Warning (14320): Synthesized away node "memoria:memory_inst|altsyncram:altsyncram_component|altsyncram_ve34:auto_generated|q_a[2]" File: C:/cpu/db/altsyncram_ve34.tdf Line: 85
         Warning (14320): Synthesized away node "memoria:memory_inst|altsyncram:altsyncram_component|altsyncram_ve34:auto_generated|q_a[3]" File: C:/cpu/db/altsyncram_ve34.tdf Line: 109
-        Warning (14320): Synthesized away node "memoria:memory_inst|altsyncram:altsyncram_component|altsyncram_ve34:auto_generated|q_a[0]" File: C:/cpu/db/altsyncram_ve34.tdf Line: 37
         Warning (14320): Synthesized away node "memoria:memory_inst|altsyncram:altsyncram_component|altsyncram_ve34:auto_generated|q_a[1]" File: C:/cpu/db/altsyncram_ve34.tdf Line: 61
-Info (17049): 94 registers lost all their fanouts during netlist optimizations.
+        Warning (14320): Synthesized away node "memoria:memory_inst|altsyncram:altsyncram_component|altsyncram_ve34:auto_generated|q_a[0]" File: C:/cpu/db/altsyncram_ve34.tdf Line: 37
+Info (17049): 95 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
 Warning (21074): Design contains 2 input pin(s) that do not drive logic
@@ -653,10 +675,10 @@ Warning (21074): Design contains 2 input pin(s) that do not drive logic
 Info (21057): Implemented 2 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 2 input pins
     Info (21059): Implemented 0 output pins
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 20 warnings
-    Info: Peak virtual memory: 4882 megabytes
-    Info: Processing ended: Sun Dec  1 20:00:39 2024
-    Info: Elapsed time: 00:00:09
-    Info: Total CPU time (on all processors): 00:00:12
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 25 warnings
+    Info: Peak virtual memory: 4874 megabytes
+    Info: Processing ended: Mon Dec  2 17:08:40 2024
+    Info: Elapsed time: 00:00:08
+    Info: Total CPU time (on all processors): 00:00:11
 
 

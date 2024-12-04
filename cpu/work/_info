@@ -10,23 +10,23 @@ z2
 cModel Technology
 dC:/intelFPGA/20.1
 Ealu
-Z0 w1733084209
+Z0 w1733169276
 Z1 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
 Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
 Z3 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
-!i122 80
+!i122 91
 Z4 dC:/cpu
 Z5 8C:/cpu/alu.vhd
 Z6 FC:/cpu/alu.vhd
 l0
 L5 1
-VC`_jb;6NjldI37>o88K<32
-!s100 J2L4<3m=7UaFC^MZ@PGXm3
+VlNd?kI`QzkYiKkA^gzjCX1
+!s100 mWXdQNIeSBG1nkGn=mnlT3
 Z7 OV;C;2020.1;71
 32
-Z8 !s110 1733085202
+Z8 !s110 1733169326
 !i10b 1
-Z9 !s108 1733085202.000000
+Z9 !s108 1733169326.000000
 Z10 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/cpu/alu.vhd|
 Z11 !s107 C:/cpu/alu.vhd|
 !i113 1
@@ -36,8 +36,8 @@ Abehavior
 R1
 R2
 R3
-Z14 DEx4 work 3 alu 0 22 C`_jb;6NjldI37>o88K<32
-!i122 80
+Z14 DEx4 work 3 alu 0 22 lNd?kI`QzkYiKkA^gzjCX1
+!i122 91
 l16
 L15 35
 V9Hj45_@hYf:WHclZMj54Y0
@@ -53,79 +53,127 @@ R11
 R12
 R13
 Ecpu
-Z15 w1733094025
+Z15 w1733179192
 R1
 R2
 R3
-!i122 87
+!i122 94
 R4
 Z16 8C:/cpu/cpu.vhd
 Z17 FC:/cpu/cpu.vhd
 l0
 L5 1
-VC3P[cDjikBHhJ`=<QFOi^2
-!s100 hj31EEYiN224ci<BYa>bd2
+V6fEB2T9R9C^HF@7OjnX;E3
+!s100 mYDBT0C^[ghF_[6jhl=U]2
 R7
 32
-Z18 !s110 1733094044
+!s110 1733179888
 !i10b 1
-Z19 !s108 1733094044.000000
-Z20 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/cpu/cpu.vhd|
-Z21 !s107 C:/cpu/cpu.vhd|
+Z18 !s108 1733179888.000000
+Z19 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/cpu/cpu.vhd|
+Z20 !s107 C:/cpu/cpu.vhd|
 !i113 1
 R12
 R13
 Abehavior
+Z21 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+Z22 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z23 DEx4 work 9 io_module 0 22 i5H]Yzi@eXGfG_kUgCFWi0
 R14
-Z22 DPx9 altera_mf 20 altera_mf_components 0 22 BN6nPmY:UEbXa[^5b@FTW1
-Z23 DEx4 work 7 memoria 0 22 fGloM=5T4BB;OmmgjF7ab2
+Z24 DPx9 altera_mf 20 altera_mf_components 0 22 BN6nPmY:UEbXa[^5b@FTW1
+Z25 DEx4 work 7 memoria 0 22 fGloM=5T4BB;OmmgjF7ab2
 R1
 R2
 R3
-Z24 DEx4 work 3 cpu 0 22 C3P[cDjikBHhJ`=<QFOi^2
-!i122 87
-l53
-L12 687
-VQiDSh;^im<ZREZE1<V[k]1
-!s100 Val0B5mQglEQCY3fm9Ab`3
+Z26 DEx4 work 3 cpu 0 22 6fEB2T9R9C^HF@7OjnX;E3
+!i122 94
+l73
+Z27 L12 726
+VJ=`1K4InlLK@cCmWg4kPX2
+!s100 1i:M9NI<D4=@N`e4IhDHn1
 R7
 32
-R18
+!s110 1733179889
 !i10b 1
+R18
 R19
 R20
+!i113 1
+R12
+R13
+Eio_module
+Z28 w1733159306
 R21
+R22
+R2
+R3
+!i122 88
+R4
+Z29 8C:/cpu/io_module.vhd
+Z30 FC:/cpu/io_module.vhd
+l0
+L6 1
+Vi5H]Yzi@eXGfG_kUgCFWi0
+!s100 ZC^D>C]T7Z7O]l]N7TnKf2
+R7
+32
+Z31 !s110 1733161192
+!i10b 1
+Z32 !s108 1733161191.000000
+Z33 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/cpu/io_module.vhd|
+Z34 !s107 C:/cpu/io_module.vhd|
+!i113 1
+R12
+R13
+Abehavioral
+R21
+R22
+R2
+R3
+R23
+!i122 88
+l18
+L17 12
+Vkb?WV]fPY=TOSVBMB`9WY2
+!s100 Ybe?5]EW]iQB]AhR<6ofA3
+R7
+32
+R31
+!i10b 1
+R32
+R33
+R34
 !i113 1
 R12
 R13
 Ememoria
-Z25 w1733008618
-R22
+Z35 w1733008618
+R24
 R2
 R3
 !i122 52
 R4
-Z26 8C:/cpu/memoria.vhd
-Z27 FC:/cpu/memoria.vhd
+Z36 8C:/cpu/memoria.vhd
+Z37 FC:/cpu/memoria.vhd
 l0
 L43 1
 VfGloM=5T4BB;OmmgjF7ab2
 !s100 egAhDhUH39ll]Zg?T>S`o3
 R7
 32
-Z28 !s110 1733027401
+Z38 !s110 1733027401
 !i10b 1
-Z29 !s108 1733027401.000000
-Z30 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/cpu/memoria.vhd|
-Z31 !s107 C:/cpu/memoria.vhd|
+Z39 !s108 1733027401.000000
+Z40 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/cpu/memoria.vhd|
+Z41 !s107 C:/cpu/memoria.vhd|
 !i113 1
 R12
 R13
 Asyn
-R22
+R24
 R2
 R3
-R23
+R25
 !i122 52
 l59
 L55 37
@@ -133,34 +181,34 @@ VYWQ:`<e1cCn64KKz6;^:J2
 !s100 Hc2U`iA:?JRXOnz@9YiU70
 R7
 32
-R28
+R38
 !i10b 1
-R29
-R30
-R31
+R39
+R40
+R41
 !i113 1
 R12
 R13
 Etestbench
-Z32 w1733008322
+Z42 w1733008322
 R1
 R2
 R3
 !i122 53
 R4
-Z33 8C:/cpu/testbench.vhd
-Z34 FC:/cpu/testbench.vhd
+Z43 8C:/cpu/testbench.vhd
+Z44 FC:/cpu/testbench.vhd
 l0
 L5 1
 VZPVk;nCdJK>KURNZKLGGM1
 !s100 AKP9mV3P:`ZYUYQ95BZ=:1
 R7
 32
-R28
+R38
 !i10b 1
-R29
-Z35 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/cpu/testbench.vhd|
-Z36 !s107 C:/cpu/testbench.vhd|
+R39
+Z45 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/cpu/testbench.vhd|
+Z46 !s107 C:/cpu/testbench.vhd|
 !i113 1
 R12
 R13
@@ -176,11 +224,11 @@ VVN`>JioD>aLn3J>JWVlU=1
 !s100 bTcZEiE<g66I][I;b@:1<1
 R7
 32
-R28
+R38
 !i10b 1
-R29
-R35
-R36
+R39
+R45
+R46
 !i113 1
 R12
 R13

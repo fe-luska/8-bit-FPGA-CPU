@@ -4,8 +4,8 @@ use ieee.numeric_std.all;
 
 entity cpu is
 	port (
-		clk    : in  std_logic;
-		reset  : in  std_logic
+		clk           : in  std_logic;
+		reset         : in  std_logic
 	);
 end cpu;
 
@@ -21,17 +21,27 @@ architecture behavior of cpu is
    -- Barramentos
    signal address_bus  : std_logic_vector(7 downto 0);
    signal data_bus     : std_logic_vector(7 downto 0);
-   signal control_bus  : std_logic_vector(5 downto 0);
+   signal control_bus  : std_logic_vector(6 downto 0);
+	
+	-- Control_bus:
+	--	1: read 				(read)
+	-- 2: write 			(wren)
+	-- 3: memory enable  (mem_enable)
+	-- 4: input_enable   (io_input_enable)
+	-- 5: output_enable  (io_output_enable)
+	-- 6: clk				(clk)
+	-- 7: reset			   (reset)
 
    -- Sinais de controle
-   signal read, write, mem_enable : std_logic;
+   signal read, mem_enable : std_logic;
    signal alu_enable : std_logic;
 	signal sign_flag : std_logic;
 	signal equal_flag: std_logic;
 
 	-- memoria
-   signal mem_data_in, mem_data_out : std_logic_vector(7 downto 0);
+   signal mem_data_in : std_logic_vector(7 downto 0);
    signal mem_wren : std_logic;
+	signal memory_enable : STD_LOGIC;
 	
 	-- ALU
 	signal zero_flag  : std_logic;
@@ -41,10 +51,20 @@ architecture behavior of cpu is
 	signal op_a 		: std_logic_vector(7 downto 0);
 	signal op_b 		: std_logic_vector(7 downto 0);
 	
-	
+	-- estados da CPU e instruções
 	type state_cpu_type is (fetch, decode, decode_wait, execute, wait_read, fetch_wait);
    type state_alu_type is (fetch_operand_A, fetch_operand_B, ready);
 	type cmp_state_type is (fetch_operand_A, fetch_operand_B, ready);
+	
+	-- sinais para IO
+	signal io_data_out : STD_LOGIC_VECTOR(7 downto 0);
+   signal io_data_in : STD_LOGIC_VECTOR(7 downto 0);
+   signal io_button_status : STD_LOGIC;
+	signal io_SW :  STD_LOGIC_VECTOR(7 downto 0);
+	signal io_BTN : STD_LOGIC;
+	signal io_LED : STD_LOGIC_VECTOR(7 downto 0);
+	signal io_input_enable  : STD_LOGIC;
+	signal io_output_enable : STD_LOGIC;
 	
 	-- pra debug
 	signal state_monitor : state_cpu_type := fetch;
@@ -59,7 +79,7 @@ begin
 			clock   => clk,
 			data    => mem_data_in, -- Para gravação na memória
 			wren    => mem_wren,    -- Habilita escrita
-			q       => mem_data_out -- Para leitura da memória
+			q       => data_bus -- Para leitura da memória
 		);
 		
 	-- ALU	
@@ -71,7 +91,17 @@ begin
 			result    => alu_result,
 			zero_flag => zero_flag
 		);
-
+		
+	-- IO
+	io_inst: entity work.io_module
+       Port map (
+          SW => io_SW,                 -- Entradas das chaves
+          BTN => io_BTN,               -- Botão de entrada
+          LED => io_LED,               -- Saídas dos LEDs
+          data_out => io_data_out,  -- Sinal interno para leitura da saida de dados
+			 data_in => io_data_in,    -- Sinal interno para entrada de dados
+          button_status => io_button_status -- Sinal interno para o estado do botão
+       );
 
 process(clk)
    
@@ -79,7 +109,8 @@ process(clk)
 	variable alu_state : state_alu_type := fetch_operand_A;
 	variable state : state_cpu_type := fetch;
 	variable cmp_state : cmp_state_type := fetch_operand_A;
-
+	variable botao_despressionado : STD_LOGIC;
+	
 begin
    if rising_edge(clk) then
 		if reset = '1' then
@@ -87,26 +118,46 @@ begin
          IR <= (others => '0');
          A <= (others => '0');
          B <= (others => '0');
-         state := fetch;
+         
+			mem_enable <= '0';
+			mem_wren <= '0';
+			read <= '0';
+			alu_enable <= '0';
+			botao_despressionado := '0';
+			io_output_enable <= '0';
+			io_input_enable <= '0';
+			
+			
+			state := fetch;
       else
          case state is
             when fetch =>
                address_bus <= PC;       -- Carrega o endereço do PC
-               mem_wren <= '0';         -- Desativa escrita
+               
+					mem_enable <= '1';
+					mem_wren <= '0';         -- Desativa escrita
                read <= '1';             -- Ativa leitura
-               state := fetch_wait;         -- Vai para o próximo estado
-					alu_enable <= '0'; -- inicizalizar
+               
+					state := fetch_wait;         -- Vai para o próximo estado
+					
+					-- inicizalizar
+					alu_enable <= '0';
+					botao_despressionado := '0';
+					mem_enable <= '0';
+					io_output_enable <= '0';
+					io_input_enable <= '0';
 				
             when fetch_wait =>
-					read <= '0';
 					state := decode;
 				
 				when decode =>
-               IR <= mem_data_out;      -- Carrega a instrução
+               IR <= data_bus;      -- Carrega a instrução
                PC <= std_logic_vector(resize(unsigned(PC) + 1, 8)); -- Incrementa PC
 					address_bus <= std_logic_vector(resize(unsigned(PC) + 1, 8)); -- recebe o valor do PC incrementado
                state := decode_wait;        -- Vai para o estado de execução
-            
+					mem_enable <= '0';
+					read <= '0';
+				
 				when decode_wait =>
 					state := execute;
 					-- isso é necessário para que no proximo ciclo o conteudo do endereço colocado ja esteja disponivel
@@ -117,7 +168,8 @@ begin
                      
 							if read = '0' then -- não fez a leitura
 							
-								address_bus <= mem_data_out; -- Coloca o endereço no barramento
+								address_bus <= data_bus; -- Coloca o endereço no barramento
+								mem_enable <= '1';
 								read <= '1';       -- Ativa leitura
 								state := wait_read; -- Vai para estado de espera
 								PC <= std_logic_vector(resize(unsigned(PC) + 1, 8)); -- Incrementa PC
@@ -125,15 +177,16 @@ begin
 							else -- já fez a leitura
 								case IR(3 downto 0) is
 									when "0000" => -- Armazena em A
-										A <= mem_data_out; -- Lê valor da memória
+										A <= data_bus; -- Lê valor da memória
 									when "0001" => -- Armazena em B
-										B <= mem_data_out; -- Lê valor da memória
+										B <= data_bus; -- Lê valor da memória
 									when "0010" => -- armazena em R
-										R <= mem_data_out;
+										R <= data_bus;
 									when others =>
 										null;              -- Operação inválida
 								end case;
 								state := fetch;          -- Retorna ao estado de busca
+								mem_enable <= '0';
 								read <= '0';
 							end if;
 						
@@ -176,13 +229,13 @@ begin
 										
 										when "11" => -- CMP A, op
 										
-											if A = mem_data_out then
+											if A = data_bus then
 												equal_flag <= '1';
 											else
 												equal_flag <= '0';
 											end if;
 
-											if signed(A) < signed(mem_data_out) then
+											if signed(A) < signed(data_bus) then
 												sign_flag <= '1';
 											else
 												sign_flag <= '0';
@@ -232,13 +285,13 @@ begin
 										
 										when "11" => -- CMP B, op
 										
-											if B = mem_data_out then
+											if B = data_bus then
 												equal_flag <= '1';
 											else
 												equal_flag <= '0';
 											end if;
 
-											if signed(B) < signed(mem_data_out) then
+											if signed(B) < signed(data_bus) then
 												sign_flag <= '1';
 											else
 												sign_flag <= '0';
@@ -288,13 +341,13 @@ begin
 										
 										when "11" => -- CMP R, op
 										
-											if R = mem_data_out then
+											if R = data_bus then
 												equal_flag <= '1';
 											else
 												equal_flag <= '0';
 											end if;
 
-											if signed(R) < signed(mem_data_out) then
+											if signed(R) < signed(data_bus) then
 												sign_flag <= '1';
 											else
 												sign_flag <= '0';
@@ -312,13 +365,13 @@ begin
 									case IR(1 downto 0) is
 										when "00" => -- CMP op, A
 										
-											if mem_data_out = A then
+											if data_bus = A then
 												equal_flag <= '1';
 											else
 												equal_flag <= '0';
 											end if;
 
-											if signed(mem_data_out) < signed(A) then
+											if signed(data_bus) < signed(A) then
 												sign_flag <= '1';
 											else
 												sign_flag <= '0';
@@ -328,13 +381,13 @@ begin
 										
 										when "01" => -- CMP op, B
 										
-											if mem_data_out = B then
+											if data_bus = B then
 												equal_flag <= '1';
 											else
 												equal_flag <= '0';
 											end if;
 
-											if signed(mem_data_out) < signed(B) then
+											if signed(data_bus) < signed(B) then
 												sign_flag <= '1';
 											else
 												sign_flag <= '0';
@@ -344,13 +397,13 @@ begin
 										
 										when "10" => -- CMP op, R
 										
-											if mem_data_out = R then
+											if data_bus = R then
 												equal_flag <= '1';
 											else
 												equal_flag <= '0';
 											end if;
 
-											if signed(mem_data_out) < signed(R) then
+											if signed(data_bus) < signed(R) then
 												sign_flag <= '1';
 											else
 												sign_flag <= '0';
@@ -378,7 +431,7 @@ begin
 						
 						-- não há parametros para essa instrução
 						-- O endereço de salto é o endereço da proxima palavra
-						PC <= mem_data_out;
+						PC <= data_bus;
 						state := fetch;
 						
 						when "0100" => -- JEQ
@@ -386,7 +439,7 @@ begin
 						-- Salta se a ultima comparação for igual
 						-- O endereço de salto é o endereço da proxima palavra
 						if equal_flag = '1' then
-							PC <= mem_data_out;
+							PC <= data_bus;
 						else
 							PC <= std_logic_vector(resize(unsigned(PC) + 1, 8)); -- Incrementa PC
 						end if;
@@ -397,7 +450,7 @@ begin
 						-- salta se primeiro comparado é maior que o segundo
 						-- O endereço de salto é o endereço da proxima palavra
 						if sign_flag = '0' and equal_flag = '0' then
-							PC <= mem_data_out;
+							PC <= data_bus;
 						else
 							PC <= std_logic_vector(resize(unsigned(PC) + 1, 8)); -- Incrementa PC
 						end if;
@@ -412,19 +465,19 @@ begin
 									case IR(1 downto 0) is
 									
 										when "00" => -- STORE A,  addr
-											address_bus <= mem_data_out;
+											address_bus <= data_bus;
 											mem_data_in <= A;
 											mem_wren <= '1';
 											PC <= std_logic_vector(resize(unsigned(PC) + 1, 8)); -- Incrementa PC
 										
 										when "01" => -- STORE B,  addr
-											address_bus <= mem_data_out;
+											address_bus <= data_bus;
 											mem_data_in <= B;
 											mem_wren <= '1';
 											PC <= std_logic_vector(resize(unsigned(PC) + 1, 8)); -- Incrementa PC
 										
 										when "10" => -- STORE R,  addr
-											address_bus <= mem_data_out;
+											address_bus <= data_bus;
 											mem_data_in <= R;
 											mem_wren <= '1';
 											PC <= std_logic_vector(resize(unsigned(PC) + 1, 8)); -- Incrementa PC
@@ -464,7 +517,7 @@ begin
 											A <= R;
 										
 										when "11" => -- MOV A, op
-											A <= mem_data_out;
+											A <= data_bus;
 											PC <= std_logic_vector(resize(unsigned(PC) + 1, 8)); -- Incrementa PC
 										when others =>
 											report "MOV: erro nos parametros";
@@ -485,7 +538,7 @@ begin
 											B <= R;
 										
 										when "11" => -- MOV B, op
-											B <= mem_data_out;
+											B <= data_bus;
 											PC <= std_logic_vector(resize(unsigned(PC) + 1, 8)); -- Incrementa PC
 											
 										when others =>
@@ -507,7 +560,7 @@ begin
 											report "MOV: erro parametro MOV R, R";
 										
 										when "11" => -- MOV R, op
-											R <= mem_data_out;
+											R <= data_bus;
 											PC <= std_logic_vector(resize(unsigned(PC) + 1, 8)); -- Incrementa PC
 									
 										when others =>
@@ -527,16 +580,71 @@ begin
 							
 						-- fim do MOV
 						when "1101" => -- IN
-							null;
+							-- Salva o valor das SWs em um registrador depois que o botao for pressionado
+							
+							io_input_enable <= '1';
+							-- aguarda o botao ser despressionado
+							if (io_button_status = '0') then
+								botao_despressionado := '1';
+							end if;
+							
+							
+							if (io_button_status = '1' and botao_despressionado = '1') then
+							
+								CASE IR(1 downto 0) is
+									
+									when "00" => -- salva em A
+										A <= io_SW;
+									when "01" => -- B
+										B <= io_SW;
+									when "10" => -- R
+										R <= io_SW;
+									when others =>
+										report "erro na instrucao IN";
+								
+								end case;
+								state := fetch;
+								botao_despressionado := '0';
+								io_input_enable <= '0';
+							
+							else -- aguarda o botao ser pressionado para salvar os dados e continuar
+								state := execute;
+							end if;
 							
 						when "1110" => -- OUT
-							null;
+							-- Exibe o valor de um registrador nos LEDs
+							
+							io_output_enable <= '1';
+							CASE IR(1 downto 0) is
+									
+								when "00" => -- exibe A
+									io_data_in <= A;
+								when "01" => -- B
+									io_data_in <= B;
+								when "10" => -- R
+									io_data_in <= R;
+								when others =>
+									report "erro na instrucao IN";
+								
+							end case;
+							state := fetch;
 							
 						when "1111" => -- WAIT
-							null;
+							-- aguarda que o BTN seja pressionado
+							if (io_button_status = '0') then
+								botao_despressionado := '1';
+							end if;
+							
+							if (io_button_status = '1' and botao_despressionado = '1') then
+								state := fetch;
+								botao_despressionado := '0';
+							else
+								state := execute;
+							end if;
 						
 						when "0000" => -- nop
-							null;
+						   -- retorna ao fetch
+							state := fetch;
 						
 						when others => -- Operação com ALU: ADD (1000), SUB (1001), AND (1010), OR (1011), NOT (1100)
 							
@@ -557,7 +665,7 @@ begin
 									
 									when "11" => -- op
 									-- fazer leitura e incrementa PC
-									op_a <= mem_data_out;
+									op_a <= data_bus;
 									state := wait_read;
 									PC <= std_logic_vector(resize(unsigned(PC) + 1, 8));
 								
@@ -582,7 +690,7 @@ begin
 									
 									when "11" => -- op
 									--fazer leitura e incrementa PC
-									op_b <= mem_data_out;
+									op_b <= data_bus;
 									state := wait_read;
 									PC <= std_logic_vector(resize(unsigned(PC) + 1, 8));
 									
@@ -614,6 +722,15 @@ begin
 		-- sinais de debug
 		state_monitor <= state;
       state_alu_monitor <= alu_state;
+		
+		-- sinais do barramento de controle
+		control_bus(0) <= read;
+		control_bus(1) <=	mem_wren;
+		control_bus(2) <=	mem_enable;
+		control_bus(3) <=	io_input_enable;
+		control_bus(4) <=	io_output_enable;
+		control_bus(5) <= clk;
+		control_bus(6) <= reset;
    end if;
 end process;
 

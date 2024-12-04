@@ -1,5 +1,5 @@
 Fitter report for cpu
-Sun Dec  1 15:28:43 2024
+Mon Dec  2 14:34:22 2024
 Quartus Prime Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
 
 
@@ -57,7 +57,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------+
 ; Fitter Summary                                                                ;
 +---------------------------------+---------------------------------------------+
-; Fitter Status                   ; Successful - Sun Dec  1 15:28:43 2024       ;
+; Fitter Status                   ; Successful - Mon Dec  2 14:34:22 2024       ;
 ; Quartus Prime Version           ; 21.1.0 Build 842 10/21/2021 SJ Lite Edition ;
 ; Revision Name                   ; cpu                                         ;
 ; Top-level Entity Name           ; cpu                                         ;
@@ -1069,7 +1069,7 @@ Info (184021): Fitter periphery placement operations ending: elapsed time is 00:
 Info (176233): Starting register packing
 Info (176235): Finished register packing
     Extra Info (176219): No registers were packed into other blocks
-Info (11798): Fitter preparation operations ending: elapsed time is 00:00:07
+Info (11798): Fitter preparation operations ending: elapsed time is 00:00:08
 Critical Warning (332012): Synopsys Design Constraints File file not found: 'cpu.sdc'. A Synopsys Design Constraints File is required by the Timing Analyzer to get proper timing constraints. Without it, the Compiler will not properly optimize the design.
 Info (332144): No user constrained base clocks found in the design
 Info (332096): The command derive_clocks did not find any clocks to derive.  No clocks were created or changed.
@@ -1098,10 +1098,10 @@ Info (334004): Delay annotation completed successfully
 Info (11801): Fitter post-fit operations ending: elapsed time is 00:00:02
 Info (144001): Generated suppressed messages file C:/cpu/output_files/cpu.fit.smsg
 Info: Quartus Prime Fitter was successful. 0 errors, 6 warnings
-    Info: Peak virtual memory: 7393 megabytes
-    Info: Processing ended: Sun Dec  1 15:28:43 2024
-    Info: Elapsed time: 00:00:38
-    Info: Total CPU time (on all processors): 00:01:42
+    Info: Peak virtual memory: 7397 megabytes
+    Info: Processing ended: Mon Dec  2 14:34:22 2024
+    Info: Elapsed time: 00:00:41
+    Info: Total CPU time (on all processors): 00:01:41
 
 
 +----------------------------+

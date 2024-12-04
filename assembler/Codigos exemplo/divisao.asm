@@ -1,9 +1,9 @@
-LOAD A, 42
-LOAD B, 43
+IN A
+IN B
 MOV R 0
 STORE R 255
 MOV R A
-LOOP_START:; teste de comentario
+LOOP_START:
     SUB R B; inicio do loop
     MOV A R
     LOAD R 255
@@ -11,5 +11,7 @@ LOOP_START:; teste de comentario
     STORE R 255
     MOV R A
     CMP R B
-    JGR LOOP_START; outro teste de comentario
-LOAD R 255; mais um teste de comentario hahaha
+    JGR LOOP_START
+LOAD R 255
+OUT R
+WAIT

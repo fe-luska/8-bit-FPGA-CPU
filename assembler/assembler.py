@@ -20,6 +20,9 @@ class Assembler8Bit:
             "AND": "A",
             "OR": "B",
             "NOT": "C",
+            "IN" : "D",
+            "OUT": "E",
+            "WAIT": "F"
         }
         self.registers = {
             "A": "0",
@@ -289,7 +292,26 @@ class Assembler8Bit:
                 machine_code.append(hex(int(reg1))[2:].upper())
             elif reg2_eh_endereco:
                 machine_code.append(reg2)
+        
+        elif opcode in ["D", "E"]: # IN, OUT
+            if len(params) != 1:
+                raise ValueError(f"Erro na linha {line_number}: {opcode} requer um parâmetros")
+            reg1 = params[0]
 
+            if not self.isRegister(reg1, line_number):
+                raise ValueError(f"Erro na linha {line_number}: registrador inválido '{reg2}'")
+            
+            if reg1.upper() == "A":
+                machine_code[0] += "0"
+            elif reg1.upper() == "B":
+                machine_code[0] += "1"
+            elif reg1.upper() == "R":
+                machine_code[0] += "2"
+
+        elif opcode == "F": # WAIT
+            # nao há parametros para essa instrução
+            machine_code[0] += "0"
+        
         return machine_code
 
     def isRegister(self, operand, line_number):
@@ -303,13 +325,37 @@ class Assembler8Bit:
     def generate_output_file(self, filename):
 
         # verifica se filename termina com .hex
-        if not filename.endswith(".hex"):
-            filename += ".hex"
+        if not filename.endswith(".mif"):
+            filename += ".mif"
 
         formated_output = [s.zfill(2).upper() for s in self.output]
-        with open(filename, "w") as file:
-            for hex_code in formated_output:
-                file.write(hex_code)
+        
+        cabecalho = """DEPTH = 256;
+WIDTH = 8;
+ADDRESS_RADIX = HEX;
+DATA_RADIX = HEX;
+
+CONTENT
+BEGIN
+"""
+        # Criação do arquivo .mif
+        with open(filename, "w") as arquivo:
+            # Escrever o cabeçalho
+            arquivo.write(cabecalho)
+
+            # Escrever os dados do vetor no formato desejado
+            for i, valor in enumerate(formated_output):
+                # Verifica se o valor é válido (dupla de caracteres hexadecimais)
+                if len(valor) == 2 and all(c in "0123456789ABCDEF" for c in valor.upper()):
+                    # Escrever o endereço e o valor
+                    arquivo.write(f"   {i:02X}  : {valor.upper()};\n")
+            
+            # Finalizar o arquivo
+            arquivo.write("END;\n")
+
+        #with open(filename, "w") as file:
+        #    for hex_code in formated_output:
+        #       file.write(hex_code)
 
     def assemble_file(self, input_file, output_file):
         with open(input_file, "r") as file:

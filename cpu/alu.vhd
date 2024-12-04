@@ -7,7 +7,7 @@ entity alu is
         operand_a : in  std_logic_vector(7 downto 0); -- Operando A
         operand_b : in  std_logic_vector(7 downto 0); -- Operando B
         alu_op    : in  std_logic_vector(3 downto 0); -- Código da operação
-        result    : buffer std_logic_vector(7 downto 0); -- Resultado da operação
+		  result    : buffer std_logic_vector(7 downto 0); -- Resultado da operação
         zero_flag : buffer std_logic                    -- Flag de zero
     );
 end alu;
